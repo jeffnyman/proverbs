@@ -45,11 +45,10 @@ module RSpec
           full_message = "#{current_indentation}  #{keyword.capitalize} #{notification.message}" unless no_keyword_display.include?(keyword)
           full_message = "#{current_indentation}  #{notification.message}" if no_keyword_display.include?(keyword)
 
-          if notification.options[:pending] && notification.options[:pending] != true
-            full_message << " (PENDING: #{notification.options[:pending]})"
-          else
-            full_message << ' (PENDING)'
-          end
+          pending_check = notification.options[:pending] && notification.options[:pending]
+
+          full_message << " (PENDING: #{notification.options[:pending]})" unless pending_check
+          full_message << ' (PENDING)' if pending_check
 
           output.puts Core::Formatters::ConsoleCodes.wrap(full_message, :pending)
         end

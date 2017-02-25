@@ -67,6 +67,12 @@ Metrics/ParameterLists:
 Metrics/LineLength:
   Enabled: false
 
+# Changing this due to how Proverbs ties in with RSpec and my
+# desire not to break apart functionality that does in fact
+# belong together.
+Metrics/AbcSize:
+  Max: 22
+
 # This is necessary in order to allow the method names to have
 # uppercase, in order to match Gherkin.
 Style/MethodName:
