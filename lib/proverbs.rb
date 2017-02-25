@@ -25,13 +25,16 @@ RSpec::Core::Formatters::DocumentationFormatter.send :include, RSpec::Proverbs::
 RSpec::Core::ExampleGroup.define_example_method :Scenario, with_steps: true
 
 formatter = RSpec.world.reporter.find_registered_formatter(RSpec::Core::Formatters::DocumentationFormatter)
-RSpec.world.reporter.register_listener(
-  formatter,
-  :example_started,
-  :example_step_passed,
-  :example_step_pending,
-  :example_step_failed
-) if formatter
+
+if formatter
+  RSpec.world.reporter.register_listener(
+    formatter,
+    :example_started,
+    :example_step_passed,
+    :example_step_pending,
+    :example_step_failed
+  )
+end
 
 require "proverbs/rspec/shared_steps"
 include RSpec::Proverbs::SharedSteps
