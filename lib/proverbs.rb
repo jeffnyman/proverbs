@@ -7,6 +7,7 @@ require "rspec/core/formatters/console_codes"
 require "rspec/core/formatters/documentation_formatter"
 
 require "proverbs/version"
+require "proverbs/contexts"
 require "proverbs/rspec/world"
 require "proverbs/rspec/reporter"
 require "proverbs/rspec/notification"
@@ -19,10 +20,13 @@ RSpec::Core::World.send        :include, RSpec::Proverbs::World
 
 RSpec::Core::Formatters::DocumentationFormatter.send :include, RSpec::Proverbs::DocumentationFormatter
 
-# This one is from rspec-examples
-## RSpec::Core::ExampleGroup.define_example_method :Steps, with_steps: true
+RSpec::Core::ExampleGroup.define_example_method :Scenario,  with_steps: true
+RSpec::Core::ExampleGroup.define_example_method :Behavior,  with_steps: true
 
-RSpec::Core::ExampleGroup.define_example_method :Scenario, with_steps: true
+RSpec::Core::ExampleGroup.define_example_method :steps, with_steps: true
+RSpec::Core::ExampleGroup.define_example_method :rules, with_steps: true
+RSpec::Core::ExampleGroup.define_example_method :tests, with_steps: true
+RSpec::Core::ExampleGroup.define_example_method :facts, with_steps: true
 
 formatter = RSpec.world.reporter.find_registered_formatter(RSpec::Core::Formatters::DocumentationFormatter)
 

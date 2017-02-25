@@ -4,11 +4,11 @@ shared_steps "push steps" do
   end
 
   When "push data" do
-    pipe.push "hello"
+    pipe.push "testing"
   end
 
   Then "pipe should have data" do
-    expect(pipe.items).to eq(["hello"])
+    expect(pipe.items).to eq(["testing"])
   end
 end
 
@@ -28,7 +28,19 @@ shared_steps "push with arguments steps" do |value|
   end
 end
 
-describe "shared steps" do
+Story 'duplicate shared steps' do
+  it 'will raise an error' do
+    expect {
+      shared_steps 'duplicate' do
+      end
+
+      shared_steps 'duplicate' do
+      end
+    }.to raise_error ArgumentError
+  end
+end
+
+Feature "shared steps" do
   let(:pipe) do
     Class.new do
       def initialize
@@ -69,10 +81,10 @@ describe "shared steps" do
   end
 
   Scenario "push with arguments and pull" do
-    include_steps "push with arguments steps", "hi"
+    include_steps "push with arguments steps", "testing"
 
-    expect(pipe.items).to eq(["hi"])
-    
+    expect(pipe.items).to eq(["testing"])
+
     include_steps "pull steps"
   end
 end

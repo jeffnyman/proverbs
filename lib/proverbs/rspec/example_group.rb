@@ -35,6 +35,34 @@ module RSpec
         action :but, message, options, &block
       end
 
+      def rule(message, options = {}, &block)
+        action :rule, message, options, &block
+      end
+
+      def fact(message, options = {}, &block)
+        action :fact, message, options, &block
+      end
+
+      def test(message, options = {}, &block)
+        action :test, message, options, &block
+      end
+
+      def step(message, options = {}, &block)
+        action :step, message, options, &block
+      end
+
+      def it(message, options = {}, &block)
+        action :it, message, options, &block
+      end
+
+      def specify(message, options = {}, &block)
+        action :specify, message, options, &block
+      end
+
+      def example(message, options = {}, &block)
+        action :example, message, options, &block
+      end
+
       private
 
       def action(type, message, options = {}, &_block)
