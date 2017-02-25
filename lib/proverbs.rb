@@ -1,0 +1,37 @@
+require "rspec/core"
+require "rspec/core/world"
+require "rspec/core/reporter"
+require "rspec/core/formatters"
+require "rspec/core/example_group"
+require "rspec/core/formatters/console_codes"
+require "rspec/core/formatters/documentation_formatter"
+
+require "proverbs/version"
+require "proverbs/rspec/world"
+require "proverbs/rspec/reporter"
+require "proverbs/rspec/notification"
+require "proverbs/rspec/example_group"
+require "proverbs/rspec/documentation_formatter"
+
+RSpec::Core::ExampleGroup.send :include, RSpec::Proverbs::ExampleGroup
+RSpec::Core::Reporter.send     :include, RSpec::Proverbs::Reporter
+RSpec::Core::World.send        :include, RSpec::Proverbs::World
+
+RSpec::Core::Formatters::DocumentationFormatter.send :include, RSpec::Proverbs::DocumentationFormatter
+
+# This one is from rspec-examples
+## RSpec::Core::ExampleGroup.define_example_method :Steps, with_steps: true
+
+RSpec::Core::ExampleGroup.define_example_method :Scenario, with_steps: true
+
+formatter = RSpec.world.reporter.find_registered_formatter(RSpec::Core::Formatters::DocumentationFormatter)
+RSpec.world.reporter.register_listener(
+  formatter,
+  :example_started,
+  :example_step_passed,
+  :example_step_pending,
+  :example_step_failed
+) if formatter
+
+require "proverbs/rspec/shared_steps"
+include RSpec::Proverbs::SharedSteps
