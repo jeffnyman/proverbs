@@ -44,7 +44,7 @@ module RSpec
         if block_given? && !options[:pending]
           begin
             yield
-          rescue Exception => e
+          rescue StandardError => e
             ::RSpec.world.reporter.example_step_failed(self, type, message, options)
             raise e
           end
