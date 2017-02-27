@@ -1,5 +1,10 @@
 # Proverbs
 
+[![Gem Version](https://badge.fury.io/rb/proverbs.svg)](http://badge.fury.io/rb/proverbs)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jeffnyman/data_builder/blob/master/LICENSE.txt)
+
+[![Dependency Status](https://gemnasium.com/jeffnyman/proverbs.png)](https://gemnasium.com/jeffnyman/proverbs)
+
 > _Let not mercy and truth forsake thee: bind them about thy neck;
 > write them upon the table of thine heart._
 >
